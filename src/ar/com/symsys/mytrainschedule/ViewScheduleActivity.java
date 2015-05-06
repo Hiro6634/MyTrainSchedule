@@ -3,7 +3,7 @@ package ar.com.symsys.mytrainschedule;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-@SuppressWarnings("deprecation")
-public class ViewScheduleActivity extends ActionBarActivity {
+public class ViewScheduleActivity extends AppCompatActivity{
 	private static final int IDLE = 0;
 	private static final String TIME = "time";
 	private static final String DESTINATION = "destination";
