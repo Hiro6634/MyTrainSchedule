@@ -1,5 +1,8 @@
 package ar.com.symsys.mytrainschedule;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -66,10 +69,20 @@ public class ViewScheduleActivity extends AppCompatActivity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		String Araca = "12:34";
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		long ms = 0;
+		try {
+			ms = sdf.parse(Araca).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Time t = new Time(ms);
+		
 		switch(state){
 		case IDLE:
-			Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "IDLE " + t.toString(), Toast.LENGTH_SHORT).show();
 			break;
 		}
 	

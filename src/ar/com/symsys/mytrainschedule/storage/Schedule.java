@@ -3,34 +3,33 @@ package ar.com.symsys.mytrainschedule.storage;
 import java.sql.Time;
 
 public class Schedule {
+	public static final String TIME_FORMAT = "HH:mm";
 	protected int 		trainId;
-	protected Time 		departureTime;
-	protected int		endStationId;
-	protected int		scheduleTypeId;
+	protected Time 		time;
+	protected int		StationId;
+	protected int 		NextStationId;
 	public int getTrainId() {
 		return trainId;
 	}
 	public void setTrainId(int trainId) {
 		this.trainId = trainId;
 	}
-	public Time getDepartureTime() {
-		return departureTime;
+	public Time getTime() {
+		return time;
 	}
-	public void setDepartureTime(Time departureTime) {
-		this.departureTime = departureTime;
+	public void setTime(Time time) {
+		this.time = time;
 	}
-	public int getEndStationId() {
-		return endStationId;
+	public int getStationId() {
+		return StationId;
 	}
-	public void setEndStationId(int endStationId) {
-		this.endStationId = endStationId;
+	public void setStationId(int stationId) {
+		StationId = stationId;
 	}
-	public int getScheduleTypeId() {
-		return scheduleTypeId;
+	public int getNextStationId() {
+		return NextStationId;
 	}
-	public void setScheduleTypeId(int scheduleTypeId) {
-		this.scheduleTypeId = scheduleTypeId;
+	public void setNextStationId(int nextStationId) {
+		NextStationId = nextStationId;
 	}
-	
-
 }
