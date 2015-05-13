@@ -2,6 +2,7 @@ package ar.com.symsys.mytrainschedule.storage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +16,9 @@ public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 	
 	private static final String 	sqlCreateStaions = "CREATE TABLE " + StationsInBranchTableSchema.TABLE_NAME + " ("
 			+ StationsInBranchTableSchema.BRANCH_ID + " INTEGER PRIMARY KEY, "
-			+ StationsInBranchTableSchema.STATION_ID + " INTEGER PRIMARY KEY) ";
+			+ StationsInBranchTableSchema.STATION_ID + " INTEGER PRIMARY KEY, "
+			+ StationsInBranchTableSchema.NEXT_STATION_ID + " INTEGER, "
+			+ StationsInBranchTableSchema.NEXT_STATION_TIME + " INTEGER )";
 	
 	public StationsInBranchSQLiteHelper(Context context){
 		super(context, dbName, null, dbVersion);
@@ -47,6 +50,8 @@ public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 		int						i;
 		
 		try{
+			SimpleDateFormat sdf = new SimpleDateFormat(Schedule.TIME_FORMAT);
+
 			i = inputStream.read();
 			while( i != -1){
 				byteArrayOutputStream.write(i);
@@ -57,8 +62,10 @@ public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 			String[] filas = byteArrayOutputStream.toString().split("\r\n");
 			for( i = 0; i < filas.length; i++){
 				ContentValues values = new ContentValues();
-				values.put(StationsInBranchTableSchema.BRANCH_ID		, filas[StationsInBranchTableSchema.colBRANCH_ID]);
-				values.put(StationsInBranchTableSchema.STATION_ID		, filas[StationsInBranchTableSchema.colSTATION_ID]);
+				values.put(StationsInBranchTableSchema.BRANCH_ID			, filas[StationsInBranchTableSchema.colBRANCH_ID]);
+				values.put(StationsInBranchTableSchema.STATION_ID			, filas[StationsInBranchTableSchema.colSTATION_ID]);
+				values.put(StationsInBranchTableSchema.NEXT_STATION_ID		, filas[StationsInBranchTableSchema.colNEXT_STATION_ID]);
+				values.put(StationsInBranchTableSchema.NEXT_STATION_TIME	, sdf.parse(filas[StationsInBranchTableSchema.colNEXT_STATION_TIME]).getTime());
 				db.insert( StationsInBranchTableSchema.TABLE_NAME, null , values);
 			}
 		}
