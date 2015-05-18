@@ -1,5 +1,8 @@
 package ar.com.symsys.mytrainschedule;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import ar.com.symsys.mytrainschedule.storage.StorageManager;
 
 public class ViewScheduleActivity extends AppCompatActivity{
 	private static final int IDLE = 0;
@@ -26,11 +30,37 @@ public class ViewScheduleActivity extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_schedule);
 		state = IDLE;
+		StorageManager.getInstance().setContext(getApplicationContext());
 		
 		listView = (ListView)findViewById(R.id.schedule_listview);
 		ArrayList<HashMap<String, String>> feedList = new ArrayList<HashMap<String,String>>();
 		
 		HashMap<String, String>  map = new HashMap<String, String>();
+
+		InputStream 			inputStream 	= getResources().openRawResource(R.raw.stations_in_branch);
+		ByteArrayOutputStream	outputStream 	= new ByteArrayOutputStream();
+		int						i;
+		String      c0,c1,c2,c3,c4;
+		try{
+			i = inputStream.read();
+			while( i != -1){
+				outputStream.write(i);
+				i = inputStream.read();
+			}
+			inputStream.close();
+			
+			String[] filas = outputStream.toString().split("\r\n");
+			
+			for( i=0; i < filas.length; i++){
+				c0 = filas[0];
+				c1 = filas[1];
+				c2 = filas[2];
+				c3 = filas[3];
+			}
+		}
+		catch( Exception e){
+			e.printStackTrace();
+		}
 		map.put(TIME, "Horario");
 		map.put(DESTINATION, "Destino");
 		map.put(TIME_TO, "Arribo en");
@@ -82,6 +112,7 @@ public class ViewScheduleActivity extends AppCompatActivity{
 		
 		switch(state){
 		case IDLE:
+			StorageManager.getInstance().getStationsByBranchId(0);
 			Toast.makeText(this, "IDLE " + t.toString(), Toast.LENGTH_SHORT).show();
 			break;
 		}

@@ -28,7 +28,7 @@ public class ScheduleSQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(sqlCreateSchedule);
-		InitialLoad(db);
+//		InitialLoad(db);
 		
 	}
 
@@ -36,7 +36,7 @@ public class ScheduleSQLiteHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + ScheduleTableSchema.TABLE_NAME );
 		db.execSQL(sqlCreateSchedule);
-		InitialLoad(db);
+//		InitialLoad(db);
 	}
 
 	private void InitialLoad(SQLiteDatabase db){

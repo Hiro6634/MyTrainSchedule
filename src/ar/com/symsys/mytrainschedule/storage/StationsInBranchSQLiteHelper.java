@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import ar.com.symsys.mytrainschedule.R;
 
 public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 	private static final String 	dbName 		= "StationsInBranchDb";
@@ -29,7 +30,7 @@ public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		try{
 			db.execSQL(sqlCreateStaions);
-			InitialLoad(db);
+//			InitialLoad(db);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -40,12 +41,12 @@ public class StationsInBranchSQLiteHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + BranchesTableSchema.TABLE_NAME );
 		db.execSQL(sqlCreateStaions);
-		InitialLoad(db);
+//		InitialLoad(db);
 	}
 
 	private void InitialLoad( SQLiteDatabase db){
 		//TODO: Insertar el objeto con el csv para inicializar la tabla
-		InputStream 			inputStream 			= this.context.getResources().openRawResource(0);
+		InputStream 			inputStream 			= context.getResources().openRawResource(R.raw.stations_in_branch);
 		ByteArrayOutputStream	byteArrayOutputStream 	= new ByteArrayOutputStream();
 		int						i;
 		

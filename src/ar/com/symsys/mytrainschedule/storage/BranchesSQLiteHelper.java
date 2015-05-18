@@ -28,7 +28,7 @@ public class BranchesSQLiteHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		try{
 			db.execSQL(sqlCreateStaions);
-			InitialLoad(db);
+//			InitialLoad(db);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class BranchesSQLiteHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + BranchesTableSchema.TABLE_NAME );
 		db.execSQL(sqlCreateStaions);
-		InitialLoad(db);
+//		InitialLoad(db);
 	}
 
 	private void InitialLoad( SQLiteDatabase db){
